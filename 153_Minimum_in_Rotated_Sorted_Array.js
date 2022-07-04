@@ -2,47 +2,21 @@
  * @param {number[]} nums
  * @return {number}
  */
-var findMin = function(nums) {
-    let left = 0
-    let right = nums.length-1
-
-    
-    //checking for edge cases
-    if (nums.length === 1){
-        return nums[0]
-    }
-    
-    if (nums[left] < nums[right]){
-        return nums[left]
-    }
-    
-    //check for inflection
-    while (left <= right){
-    let mid = left + Math.floor((right - left) / 2)
-    let midVal = nums[mid]
-    let leftVal = nums[left]
-    let rightVal = nums[right]
-    let leftOfMid = nums[mid-1]
-    let rightOfMid = nums[mid+1]
-    
-        if (rightOfMid < midVal){
-            return rightOfMid
-        } else if (midVal < leftOfMid){
-            return midVal
-        }
-
-        if (midVal > leftVal){
-            left = mid + 1
-        } else {
-            right = mid - 1
+ var findMin = function(nums) {
+    if (nums.length === 1) return nums[0]
+    let L = 0
+    let R = nums.length-1
+    if (nums[L] < nums[R]) return nums[L]
+    while (L < R){
+        let M = L + Math.floor((R-L)/2)
+        if (nums[M] > nums[M+1]) return nums[M+1]
+        else if (nums[M] < nums[M-1]) return nums[M]
+        else{
+            if(nums[M] > nums[L]){
+                L = M+1
+            } else{
+                R = M
+            }
         }
     }
 };
-    
-    
-    
-//     1, 2, 3, 4, 5
-//     2, 3, 4, 5, 1 <--- check inflection
-//     3, 4, 5, 1, 2 
-//     4, 5, 1, 2, 3
-//           m
