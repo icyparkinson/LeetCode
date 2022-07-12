@@ -31,3 +31,5 @@ var sortArray = function(nums, left=0, right=nums.length-1) {
         sortArray(nums, pivId+1, right)
     } return nums
 };
+
+REDO with merge sort and quick sort
