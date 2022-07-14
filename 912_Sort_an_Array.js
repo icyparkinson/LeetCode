@@ -24,3 +24,20 @@ function mergeSort(array){
 let arr = [2, 4, 1, 6, -2, 99, 0]
 
 console.log(mergeSort(arr))
+
+
+
+function quickSort(array){
+    if (array.length <= 1) return array
+    
+    let pivot = array[array.length-1]
+    
+    let left = []
+    let right = []
+    
+    for (let el of array.slice(0, array.length-1)){
+        el < pivot ? left.push(el) : right.push(el)
+    }
+    
+    return [...left, pivot, ...right]
+}
