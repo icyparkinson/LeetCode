@@ -15,3 +15,23 @@
     }
     
 };
+
+var majorityElement = function(nums) {
+    let count = 0
+    let focus = nums[0]
+    for (let i = 0; i < nums.length; i++){
+        let val = nums[i]
+        if (val === focus){
+            count++
+        }
+        else{
+            (count--)
+            if (count < 0){
+                focus = val
+                count = 0
+            }
+        }
+    }
+
+    return focus
+}
