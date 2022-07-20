@@ -11,7 +11,7 @@ First of all, the first letter of each keypad HAS to be in the word. (So the one
 */
 
 function solve(wordlist, keypads){
-    for ()
+    
     
     
 }
