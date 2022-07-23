@@ -36,3 +36,36 @@
         
     } return -1
 };
+
+
+/**
+ * @param {number[][]} grid
+ * @return {number}
+ */
+ var shortestPathBinaryMatrix = function(grid) {
+    let ROW = grid.length
+    let COL = grid[0].length
+    
+    let visited = new Set()
+    
+    let q = [{r: 0, c: 0, s: 1}]
+    
+    while (q.length){
+        let curr = q.shift()
+        let coord = `${curr.r} ${curr.c}`
+        if (curr.r < 0 || curr.c < 0 || curr.r === ROW || curr.c === COL || visited.has(coord) || grid[curr.r][curr.c] === 1) continue
+        visited.add(coord)
+        if (curr.r === ROW-1 && curr.c === COL-1) return curr.s
+        
+        q.push({r: curr.r+1, c: curr.c, s: curr.s+1})
+        q.push({r: curr.r-1, c: curr.c, s: curr.s+1})
+        q.push({r: curr.r, c: curr.c+1, s: curr.s+1})
+        q.push({r: curr.r, c: curr.c-1, s: curr.s+1})
+        q.push({r: curr.r+1, c: curr.c+1, s: curr.s+1})
+        q.push({r: curr.r-1, c: curr.c-1, s: curr.s+1})
+        q.push({r: curr.r+1, c: curr.c-1, s: curr.s+1})
+        q.push({r: curr.r-1, c: curr.c+1, s: curr.s+1})
+        
+    }
+    return -1
+};
