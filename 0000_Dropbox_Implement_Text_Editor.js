@@ -202,7 +202,7 @@ console.log(obj.addText("hi there"))
 
 
 
-// ULTIMATE TEXT EDITOR (can add, delete, undo, redo, move cursor)
+// ULTIMATE TEXT EDITOR (can add, delete, undo, redo, move cursor, and switch between documents!)
 
 function performActions(actions){
     let left = ""
@@ -211,6 +211,7 @@ function performActions(actions){
     let undo = []
     let redo = []
     let pos = 0
+    let oldDoc = {}
     for (let action of actions){
         let [command, arg] = action
         if (command === "INSERT"){
@@ -296,8 +297,51 @@ function performActions(actions){
                 console.log(result)
             }
         }
+        
+        else if (command === "NEW"){
+            oldDoc = {
+                "left": left,
+                "right": right,
+                "pos": pos,
+                "undo" : undo,
+                "redo" : redo,
+                "result" : result
+            }
+            
+            left = ""
+            right = ""
+            pos = 0
+            undo = []
+            redo = []
+            result = []
+            
+            result.push(left + "|" + right)
+            console.log(result)
+            console.log(oldDoc)
+        }
+        
+        else if (command == "SWITCH"){
+            let tempDoc = {
+                "left": left,
+                "right": right,
+                "pos": pos,
+                "undo" : undo,
+                "redo" : redo,
+                "result" : result
+            }
+            left = oldDoc.left
+            right = oldDoc.right
+            pos = oldDoc.pos
+            undo = oldDoc.undo
+            redo = oldDoc.redo
+            result = oldDoc.result
+            
+            oldDoc = tempDoc
+            result.push(left + "|" + right)
+            console.log(result)
+        }
     }
 }
 
-let actions = [["INSERT", "hi"], ["INSERT", "bye"], ["UNDO"], ["UNDO"], ["REDO"],["DELETE", 1], ["UNDO"], ["REDO"]]
+let actions = [["INSERT", "hi"], ["INSERT", "bye"], ["UNDO"], ["UNDO"], ["REDO"],["DELETE", 1], ["UNDO"], ["REDO"], ["NEW"], ["INSERT", "tomorrow"], ["SWITCH"], ["SWITCH"]]
 performActions(actions)
