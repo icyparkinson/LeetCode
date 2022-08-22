@@ -9,15 +9,17 @@ class MinStack{
         this.stack.push(val)
         
        // add a value to min stack
-        // let lastMin = this.min[this.min.length-1]
+        // if nothing is in the min stack already... add the current value
         if (!this.min.length){
             this.min.push(val)
+        //otherwise, set the previous min to a variable called lastMin and then push to the stack whichever is smaller, the lastMin or the current val
         } else{
             let lastMin = this.min[this.min.length-1]
             this.min.push(Math.min(val, lastMin))
         }
     }
     
+    //pop from both stacks to stay consistent
     pop(){
         this.min.pop()
         return this.stack.pop()
