@@ -27,7 +27,7 @@
         } return false
     }
     
-    
+    //make adjacency list from the edges provided
     function buildGraph(edges){
         const graph ={}
         
