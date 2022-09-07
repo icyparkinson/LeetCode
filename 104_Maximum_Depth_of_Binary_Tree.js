@@ -1,39 +1,44 @@
-// function maxDepth(root){
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+ var maxDepth = function(root) {
+    //bfs
 //     if (root === null) return 0
-//     let stack = [root]
-//     let tempStack = []
-//     let temp
-//     let count = 0
-//     while (stack.length > 0){
-//         temp = stack.pop()
-//         if (temp.left) tempStack.push(temp.left)
-//         if (temp.right) tempStack.push(temp.right)
-//         if (stack.length === 0){
-//             count ++
-//             stack = tempStack
-//             tempStack = []
-//         }
-//     } return count
-// }
-
-// function maxDepth(root){
-//     if (root === null) return 0
-//     return 1 + Math.max(maxDepth(root.left), maxDepth(root.right))
-// }
-
-function maxDepth(root){
-    if (root === null) return 0
-    let queue = [root]
-    let depth = 0
     
-    while (queue.length > 0){
-        let len = queue.length
-        for (let i = 0; i < len; i++){
-            let curr = queue.shift()
-            if (curr.left) queue.push(curr.left)
-            if (curr.right) queue.push(curr.right)
-        }
-        depth++
+//     let depth = 0
+    
+//     let queue = [root]
+//     while (queue.length > 0){
+//         let len = queue.length
+//         for (let i = 0; i < len; i++){
+//             let node = queue.shift()
+//             if (node.left) queue.push(node.left)
+//             if (node.right) queue.push(node.right)
+//         }
+//         depth++
+//     }
+    
+//     return depth
+    
+    
+    let lvl = 0
+    let dfs = (node, depth) => {
+        if (!node) return maxDepth
+        lvl = Math.max(lvl, depth)
+        dfs(node.left, depth+1)
+        dfs(node.right, depth+1)
     }
-    return depth
-}
+    
+    dfs(root, 1)
+    return lvl
+    
+};
