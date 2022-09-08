@@ -1,17 +1,27 @@
 /**
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
+ * @param {number[]} nums
+ * @return {number}
  */
- var rotate = function(matrix) {
-    for (let row = 0; row < matrix.length; row++){
-        for (let col = row; col < matrix.length; col++){
-            let cur = matrix[row][col]
-            matrix[row][col] = matrix[col][row]
-            matrix[col][row] = cur
-        }
+ var rob = function(nums) {
+    if (nums.length === 1){
+        return nums[0]
     }
     
-    for (let i = 0; i < matrix.length; i++){
-        matrix[i].reverse()
+    return Math.max(helper(nums, 1, nums.length), helper(nums, 0, nums.length-1))
+    
+    
+    function helper(nums, start, end){
+        let rob1 = 0
+        let rob2 = 0
+        
+        for (let i = start; i < end; i++){
+            let temp = Math.max(rob2, nums[i]+rob1)
+            rob1 = rob2
+            rob2 = temp
+        }
+        return rob2
     }
+    
 };
+
+
