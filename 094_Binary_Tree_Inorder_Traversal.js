@@ -24,18 +24,14 @@
 
 
 var kthSmallest = function(root, k) {
-    var inorderTraversal = function(root) {
-        let answer = []
-        if (!root) return answer
-        const traversal = (node) => {
-            if (node.left) traversal(node.left)
-            answer.push(node.val)
-            if (node.right) traversal(node.right)
-        }
-        traversal(root)
-        return answer
-    };
+    if (!root) return []
+    let list = []
+    let traversal = (node) => {
+        if (node.left) traversal(node.left)
+        list.push(node.val)
+        if (node.right) traversal(node.right)
+    }
     
-    let list = inorderTraversal(root)
+    traversal(root)
     return list[k-1]
 };
