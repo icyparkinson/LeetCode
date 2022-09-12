@@ -1,12 +1,13 @@
-var getSum = function (a, b) {
-    let tb = b;
-    let res = a;
-
-    while (tb) {
-        let temp = (res & tb) << 1;
-        res = res ^ tb;
-        tb = temp;
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+ var getSum = function(a, b) {
+    while (b !== 0){
+        let temp = (a & b) <<1
+        a = a ^ b
+        b = temp
     }
-
-    return res;
+    return a
 };
