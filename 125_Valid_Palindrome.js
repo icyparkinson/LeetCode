@@ -37,4 +37,43 @@
     
 };
                                 
-                                
+                    
+// break everything up into helper functions:
+
+/**
+ * @param {string} s
+ * @return {boolean}
+ */
+ var isPalindrome = function(s) {
+    let isVal = (str) => {
+        let chars = "0123456789abcdefghjijklmnopqrstuvwxyz"
+        if (chars.includes(str)){
+            return true
+        }
+        return false
+    }
+    
+    let isPal = (str) => {
+        let l = 0
+        let r = str.length-1
+        while (l < r){
+            if (str[l] !== str[r]) return false
+            l++
+            r--
+        }
+        return true
+    }
+    
+    
+    let lower = s.toLowerCase()
+    let str = ""
+    for (let c of lower){
+        if (isVal(c)){
+            str+= c
+        }
+    }
+    
+    return isPal(str)
+    
+};
+
